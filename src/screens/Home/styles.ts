@@ -19,10 +19,8 @@ export const styles = StyleSheet.create({
     backgroundColor: "#0D0D0D",
   },
   form: {
-    display: "flex",
+    width: "90%",
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
     gap: 5,
     marginTop: 120,
     marginHorizontal: 20,
@@ -45,7 +43,7 @@ export const styles = StyleSheet.create({
     color: "#5E60CE",
   },
   textInput: {
-    flexGrow: 1,
+    flex: 1,
     backgroundColor: "#262626",
     fontSize: 18,
     color: "#C4C4CC",
@@ -57,14 +55,14 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#1E6F9F",
-    minWidth: 55,
-    minHeight: 55,
+    width: 55,
+    height: 55,
     borderRadius: 10,
   },
   taskList: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+
     marginHorizontal: 20,
     paddingVertical: 10,
   },
