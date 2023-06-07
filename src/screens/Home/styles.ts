@@ -66,19 +66,4 @@ export const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingVertical: 10,
   },
-  taskEmptyText: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginHorizontal: 20,
-    fontWeight: "bold",
-    color: "#808080",
-  },
-  taskInfoText: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginHorizontal: 20,
-    color: "#808080",
-  },
 });

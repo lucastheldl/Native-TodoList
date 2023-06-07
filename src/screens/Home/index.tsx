@@ -5,21 +5,23 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  ScrollView,
 } from "react-native";
 import { styles } from "./styles";
-import { Clipboard, PlusCircle } from "lucide-react-native";
-import { Task } from "../../components/task/Task";
+import { PlusCircle } from "lucide-react-native";
 import { useState } from "react";
+//components
+import { Task } from "../../components/task/Task";
+import { NoTasks } from "../../components/noTasks/NoTasks";
 
-interface Task {
+export interface iTask {
   id: number;
   titleText: string;
   completed: boolean;
 }
 export function Home() {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [taskTitle, setTaskTitle] = useState("");
+  const [tasks, setTasks] = useState<iTask[]>([]);
+  const [taskTitle, setTaskTitle] = useState<string>("");
+  const [completedTasks, setCompletedTasks] = useState<iTask[]>([]);
 
   function handleCreateTask() {
     const task = {
@@ -29,9 +31,21 @@ export function Home() {
     };
 
     setTasks((prevState) => [...prevState, task]);
+    setTaskTitle("");
   }
 
-  function handleTaskDeletion(id: number) {}
+  function handleTaskDeletion(id: number) {
+    setTasks((prevState) => prevState.filter((task) => task.id !== id));
+  }
+
+  function handleEditTask(task: iTask) {
+    task.completed = !task.completed;
+
+    setTasks((prevState) =>
+      prevState.map((t) => (t.id === task.id ? (t = task) : t))
+    );
+    setCompletedTasks(tasks.filter((task) => task.completed));
+  }
 
   return (
     <View style={styles.container}>
@@ -62,8 +76,12 @@ export function Home() {
       </View>
 
       <View style={styles.statusForm}>
-        <Text style={styles.createdText}>Criadas</Text>
-        <Text style={styles.CompletedText}>Concluídas</Text>
+        <Text style={styles.createdText}>
+          Criadas<Text>{tasks.length}</Text>
+        </Text>
+        <Text style={styles.CompletedText}>
+          Concluídas<Text>{completedTasks.length}</Text>
+        </Text>
       </View>
 
       <FlatList
@@ -71,23 +89,14 @@ export function Home() {
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => (
           <Task
-            id={1}
+            task={item}
             titleText={item.titleText}
             handleTaskDeletion={handleTaskDeletion}
+            handleEditTask={handleEditTask}
           />
         )}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={() => (
-          <View>
-            <Clipboard size={60} color="#333333" />
-            <Text style={styles.taskEmptyText}>
-              Você ainda não tem tarefas cadastradas
-            </Text>
-            <Text style={styles.taskInfoText}>
-              Crie tarefas e organize seus itens a fazer
-            </Text>
-          </View>
-        )}
+        ListEmptyComponent={() => <NoTasks />}
         style={styles.taskList}
       ></FlatList>
     </View>
