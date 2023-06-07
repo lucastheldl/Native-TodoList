@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 import { PlusCircle } from "lucide-react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 //components
 import { Task } from "../../components/task/Task";
 import { NoTasks } from "../../components/noTasks/NoTasks";
@@ -46,6 +46,9 @@ export function Home() {
     );
     setCompletedTasks(tasks.filter((task) => task.completed));
   }
+  useEffect(() => {
+    setCompletedTasks(tasks.filter((task) => task.completed));
+  }, [tasks]);
 
   return (
     <View style={styles.container}>
@@ -76,12 +79,15 @@ export function Home() {
       </View>
 
       <View style={styles.statusForm}>
-        <Text style={styles.createdText}>
-          Criadas<Text>{tasks.length}</Text>
-        </Text>
-        <Text style={styles.CompletedText}>
-          Concluídas<Text>{completedTasks.length}</Text>
-        </Text>
+        <View style={styles.status}>
+          <Text style={styles.createdText}>Criadas</Text>
+          <Text style={styles.amountCountText}>{tasks.length}</Text>
+        </View>
+
+        <View style={styles.status}>
+          <Text style={styles.CompletedText}>Concluídas</Text>
+          <Text style={styles.amountCountText}>{completedTasks.length}</Text>
+        </View>
       </View>
 
       <FlatList

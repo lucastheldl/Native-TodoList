@@ -26,7 +26,6 @@ export const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   statusForm: {
-    display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 15,
@@ -34,11 +33,20 @@ export const styles = StyleSheet.create({
     borderBottomColor: "#262626",
     marginHorizontal: 20,
   },
+  status: {
+    flexDirection: "row",
+    gap: 3,
+    alignItems: "center",
+  },
   createdText: {
+    flexDirection: "row",
+    gap: 3,
     fontWeight: "bold",
     color: "#4EA8DE",
   },
   CompletedText: {
+    flexDirection: "row",
+    gap: 3,
     fontWeight: "bold",
     color: "#5E60CE",
   },
@@ -65,5 +73,16 @@ export const styles = StyleSheet.create({
 
     marginHorizontal: 20,
     paddingVertical: 10,
+  },
+  amountCountText: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#C4C4CC",
+    backgroundColor: "#262626",
+    fontWeight: "bold",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 50,
   },
 });
